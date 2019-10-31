@@ -37,14 +37,14 @@
     }
     </style>
 
- <section>
+    <section class="newHeader">
         <header>
             <h1>This is the header</h1>
         </header>
-        <button>
+        <button class= "button1">
             Click
         </button>
-        <footer>
+        <footer class="foot">
             <h1>This is the footer</h1>
         </footer>
     </section>
@@ -55,6 +55,26 @@
         super();
         this._shadowRoot = this.attachShadow({ mode: 'open' });
         this._shadowRoot.appendChild(template.content.cloneNode(true));
+
+        this.$newHeader = this._shadowRoot.querySelector('.newHeader')
+        this.$button1 = this._shadowRoot.querySelector('.button1')
+        this.$foot = this._shadowRoot.querySelector('.foot')
+        this.attrs = {}
+        }
+        static get observedAttributes() {return ['first', 'second', 'third' ]; }
+
+        attributeChangedCallback(name, oldVal, newVal){
+            this.attrs[name] = newVal;
+            this.render();
+        }
+        render(){
+            let first = this.attrs.first;
+            this.$newHeader.style.background = first;
+
+           let second = this.attrs.second
+           this.$button1.style.border = second;
+           this.$newHeader.style.border = second;
+            
         }
     }
 
@@ -62,9 +82,9 @@
 
     </script>
 
-    <my-box></my-box>
-    <my-box></my-box>
-    <my-box></my-box>
+    <my-box first = "blue" second = "3px solid yellow"></my-box>
+    <my-box first = "green" second = "3px solid blue"></my-box>
+    <my-box first = "yellow" second = "3px solid green"></my-box>
    
 </body>
 </html>
