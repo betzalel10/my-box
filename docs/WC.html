@@ -59,6 +59,16 @@
         this.$newHeader = this._shadowRoot.querySelector('.newHeader')
         this.$button1 = this._shadowRoot.querySelector('.button1')
         this.$foot = this._shadowRoot.querySelector('.foot')
+
+        this.$button1.addEventListener('click', () => {
+            this.dispatchEvent(
+                new CustomEvent('boom',{
+                    detail: 'hello from the ather world',
+                })
+            );
+            
+        });
+
         this.attrs = {}
         }
         static get observedAttributes() {return ['first', 'second', 'third' ]; }
@@ -73,7 +83,7 @@
 
            let second = this.attrs.second
            this.$button1.style.border = second;
-           this.$newHeader.style.border = second;
+          
             
         }
     }
@@ -82,9 +92,20 @@
 
     </script>
 
-    <my-box first = "blue" second = "3px solid yellow"></my-box>
-    <my-box first = "green" second = "3px solid blue"></my-box>
-    <my-box first = "yellow" second = "3px solid green"></my-box>
+    <my-box id="a" first = "blue" second = "3px solid yellow"></my-box>
+    <my-box id="b" first = "green" second = "3px solid blue"></my-box>
+    <my-box id="c" first = "yellow" second = "3px solid green"></my-box>
+
+    <script>
+    let a = document.getElementById('a')
+    a.addEventListener('boom', value => alert(value.detail))
+
+    let b = document.getElementById('b')
+    b.addEventListener('boom', value => alert(value.detail))
+
+     let c = document.getElementById('c')
+    c.addEventListener('boom', value => alert(value.detail))
+    </script>
    
 </body>
 </html>
