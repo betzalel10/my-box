@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+ 
+</head>
+<body>
+   
+    <script>
+    const template = document.createElement('template');
+    
+    template.innerHTML = `
+       
+    <style>
+    section{
+        width: 200px;
+        border: 8px solid pink;
+        padding: 10px;
+        margin: 50px;
+    }
+    header{
+        background-color: blueviolet;
+        color:gold;
+    }
+    button{
+        margin-left: 50px;
+        background-color: crimson;
+        color: chartreuse;
+    }
+    footer{
+        background-color: aquamarine;
+        color: coral;
+    }
+    </style>
+
+ <section>
+        <header>
+            <h1>This is the header</h1>
+        </header>
+        <button>
+            Click
+        </button>
+        <footer>
+            <h1>This is the footer</h1>
+        </footer>
+    </section>
+    `;
+
+    class box extends HTMLElement {
+        constructor() {
+        super();
+        this._shadowRoot = this.attachShadow({ mode: 'open' });
+        this._shadowRoot.appendChild(template.content.cloneNode(true));
+        }
+    }
+
+    window.customElements.define('my-box', box);
+
+    </script>
+
+    <my-box></my-box>
+    <my-box></my-box>
+    <my-box></my-box>
+   
+</body>
+</html>
